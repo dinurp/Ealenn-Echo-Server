@@ -84,6 +84,8 @@ Available:
 | ENABLE__HEADER      | application.enable.header      | --enable:header      | `true`        |
 | ENABLE__ENVIRONMENT | application.enable.environment | --enable:environment | `true`        |
 | ENABLE__FILE        | application.enable.file        | --enable:file        | `true`        |
+| ENABLE__unrollRequest | application.enable.unrollRequest | --enable:unrollRequest | `false` |
+| ENABLE__decodeJwt   | application.enable.decodeJwt   | --enable:decodeJwt   | `false`       |
 
 ## <a name='UseEcho-Server'></a>Use Echo-Server
 

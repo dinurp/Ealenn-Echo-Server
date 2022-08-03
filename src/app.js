@@ -19,8 +19,10 @@ app.disable('x-powered-by');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json());
+//assume text if no content-type is specified
+app.use(bodyParser.text({limit: 1024,type: (r) => r.headers['content-type'] == null }));
 app.use(require('cookie-parser')());
-app.use(require('multer')().array());
+app.use(require('multer')().any());
 
 // Middlewares
 app.use(require('./middlewares/customResponseTime'));
@@ -37,7 +39,11 @@ app.use(require('./middlewares/customHttpBodyMiddleware'));
 app.all('*', (req, res) => res.json({
   host: require('./response/host')(req),
   http: require('./response/http')(req),
-  request: require('./response/request')(req),
+  ... unrollRequest( require('./response/request')(req) ),
   environment: require('./response/environment')(req)
 }));
 module.exports = server
+
+function unrollRequest( request ){
+  return require('./nconf').get('enable:unrollrequest') ? request : {request};
+}

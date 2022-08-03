@@ -5,7 +5,9 @@
   "main": "./src/app.js",
   "scripts": {
     "start": "node ./src/webserver",
+    "prebuild": "rimraf dist",
     "build": "webpack --config webpack.config.js",
+    "postbuild": "copyfiles --up 1 src/global.json dist",
     "test": "mocha",
     "test-with-coverage": "nyc --reporter lcovonly --check-coverage mocha"
   },
@@ -37,12 +39,15 @@
     "bunyan-seq": "^0.x.x",
     "cookie-parser": "^1.x.x",
     "express": "^4.x.x",
+    "jwt-decode": "^2.2.0",
     "multer": "^1.x.x",
     "nconf": "^0.12.x"
   },
   "devDependencies": {
+    "copyfiles": "^2.4.1",
     "mocha": "^10.x.x",
     "nyc": "^15.x.x",
+    "rimraf": "^3.0.2",
     "supertest": "^6.x.x",
     "terser-webpack-plugin": "^5.x.x",
     "webpack": "^5.x.x",

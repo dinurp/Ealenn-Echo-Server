@@ -21,7 +21,9 @@
         "cookies": true,
         "environment": true,
         "file": true,
-        "header": true
+        "header": true,
+        "decodejwt": false,
+        "unrollrequest": false
     },
     "controls": {
         "times": {

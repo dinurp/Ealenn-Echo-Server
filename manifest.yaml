@@ -1,0 +1,20 @@
+---
+applications:
+- name: echo
+  path: dist
+  env:
+    ENABLE__Environment: false
+    ENABLE__Cookies: false
+    ENABLE__unrollRequest: true
+    ENABLE__decodeJwt: true
+  buildpacks:
+  - nodejs_buildpack
+  stack: cflinuxfs3
+  randomroute: true
+  processes:
+  - type: web
+    command: node webserver --port ${PORT:-8080}
+    instances: 1
+    memory: 1M
+    disk_quota: 125M
+    health-check-type: port
